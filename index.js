@@ -1,21 +1,18 @@
-const { request } = require('express');
 const express = require('express');
-const app = express();
+
+const handler = require('./handler');
 const userRouter = require('./router');
 
-// middleware
-app.use(express.json());
-app.use(express.raw());
-app.use(express.urlencoded());
+const app = express();
+const admin = express();
 
-app.use('/user', userRouter);
+app.use('/admin', admin);
 
-// raw file reading request
-// app.post('/raw', (req, res) => {
-//   const result = req;
-//   console.log(req.body);
-//   res.send(req.body);
-// });
+admin.get('/dashboard', (req, res) => {
+  res.send('admin dashboard');
+});
+
+app.use('/', userRouter);
 
 app.listen(5000, (err, res) => {
   console.log('Server is listening on port 5000');
