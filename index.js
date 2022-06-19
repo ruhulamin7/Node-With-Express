@@ -1,13 +1,12 @@
 const express = require('express');
 const app = express();
-app.set('name', 'Ruhul');
-app.all('/admin', (req, res, next) => {
-  res.send('all route');
-  next();
+
+app.get('/user/:userId', (req, res) => {
+  console.log(req.params);
 });
-app.get('/admin', (req, res) => {
-  console.log(req.app.get('name'));
-  console.log(app.enabled());
+app.param('userId', (req, res, next, id) => {
+  console.log(id);
+  next();
 });
 
 app.listen(5000, (err, res) => {
