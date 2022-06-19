@@ -1,6 +1,8 @@
 const handler = (req, res) => {
+  console.log(req.app.mountpath);
+  console.log(req.baseUrl);
+
   res.send('This is a test request');
-  console.log(req);
 };
 
 module.exports = handler;

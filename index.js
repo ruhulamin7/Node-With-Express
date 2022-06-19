@@ -1,11 +1,13 @@
 const express = require('express');
 const app = express();
-// const ejs = require('ejs');
-// app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'ejs');
+const handler = require('./handler');
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
 
-app.get('/', (req, res) => {
-  res.render('index.ejs', { name: 'Ruhul' });
+app.use(express.json());
+app.get('/', function (req, res) {
+  console.log(req.cookies);
+  res.send('Done');
 });
 
 app.listen(5000, (err, res) => {
