@@ -1,8 +1,9 @@
 const handler = (req, res) => {
-  console.log(req.app.mountpath);
-  console.log(req.baseUrl);
-
-  res.send('This is a test request');
+  req.app.get('/user', function (req, res) {
+    res.send('redirected to user');
+  });
 };
+
+
 
 module.exports = handler;

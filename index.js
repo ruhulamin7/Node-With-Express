@@ -1,14 +1,32 @@
 const express = require('express');
 const app = express();
-const handler = require('./handler');
-const cookieParser = require('cookie-parser');
-app.use(cookieParser());
-
 app.use(express.json());
-app.get('/', function (req, res) {
-  console.log(req.cookies);
-  res.send('Done');
+
+function myMiddleware(req, res, next) {
+  console.log(a);
+  console.log('middleware1');
+  next();
+}
+function myMiddleware2(req, res, next) {
+  console.log('middleware2');
+  next();
+}
+app.use(myMiddleware);
+app.use(myMiddleware2);
+
+app.get('/', function (req, res, next) {
+  console.log('hello1');
+  next();
 });
+app.get('/', function (req, res, next) {
+  next();
+});
+
+app.use(errorHandler);
+
+function errorHandler(err, req, res, next) {
+  res.status(500).send(err.message);
+}
 
 app.listen(5000, (err, res) => {
   console.log('Server is listening on port 5000');
