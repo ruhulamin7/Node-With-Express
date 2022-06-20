@@ -3,7 +3,12 @@ const app = express();
 app.use(express.json());
 
 function myMiddleware(req, res, next) {
-  console.log(a);
+  try {
+    console.log(a);
+  } catch (err) {
+    throw Error(err.message);
+  }
+  console.log(b);
   console.log('middleware1');
   next();
 }
