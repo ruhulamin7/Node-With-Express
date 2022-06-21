@@ -16,8 +16,8 @@ function myMiddleware2(req, res, next) {
   console.log('middleware2');
   next();
 }
-app.use(myMiddleware);
-app.use(myMiddleware2);
+// app.use(myMiddleware);
+app.use([myMiddleware, myMiddleware2]);
 
 app.get('/', function (req, res, next) {
   console.log('hello1');
